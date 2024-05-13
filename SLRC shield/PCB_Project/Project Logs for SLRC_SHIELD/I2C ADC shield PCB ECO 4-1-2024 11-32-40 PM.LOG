@@ -1,0 +1,12 @@
+Removed Pin From Net: NetName=+5 Pin=Input 5v- 
+Removed Member From Class: ClassName=Designator Member=P9
+Change Component Designator: OldDesignator=P1 NewDesignator=P8
+Change Component Designator: OldDesignator=P2 NewDesignator=P7
+Change Component Designator: OldDesignator=P3 NewDesignator=P6
+Change Component Designator: OldDesignator=P4 NewDesignator=P5
+Change Component Designator: OldDesignator=P5 NewDesignator=P in
+Change Component Designator: OldDesignator=P6 NewDesignator=P4
+Change Component Designator: OldDesignator=P7 NewDesignator=P1
+Change Component Designator: OldDesignator=P8 NewDesignator=P3
+Change Component Designator: OldDesignator=P9 NewDesignator=P2
+Added Member To Class: ClassName=Designator Member=Component P in Input SDA SCA

@@ -1,0 +1,78 @@
+Removed Pin From Net: NetName=5V Pin=DIGITAL1-1
+Removed Pin From Net: NetName=5V Pin=DIGITAL1-2
+Removed Pin From Net: NetName=IO22 Pin=DIGITAL1-3
+Removed Pin From Net: NetName=IO23 Pin=DIGITAL1-4
+Removed Pin From Net: NetName=IO24 Pin=DIGITAL1-5
+Removed Pin From Net: NetName=IO25 Pin=DIGITAL1-6
+Removed Pin From Net: NetName=IO26 Pin=DIGITAL1-7
+Removed Pin From Net: NetName=IO27 Pin=DIGITAL1-8
+Removed Pin From Net: NetName=IO28 Pin=DIGITAL1-9
+Removed Pin From Net: NetName=IO29 Pin=DIGITAL1-10
+Removed Pin From Net: NetName=IO30 Pin=DIGITAL1-11
+Removed Pin From Net: NetName=IO31 Pin=DIGITAL1-12
+Removed Pin From Net: NetName=IO32 Pin=DIGITAL1-13
+Removed Pin From Net: NetName=IO33 Pin=DIGITAL1-14
+Removed Pin From Net: NetName=IO34 Pin=DIGITAL1-15
+Removed Pin From Net: NetName=IO35 Pin=DIGITAL1-16
+Removed Pin From Net: NetName=IO36 Pin=DIGITAL1-17
+Removed Pin From Net: NetName=IO37 Pin=DIGITAL1-18
+Removed Pin From Net: NetName=IO38 Pin=DIGITAL1-19
+Removed Pin From Net: NetName=IO39 Pin=DIGITAL1-20
+Removed Pin From Net: NetName=IO40 Pin=DIGITAL1-21
+Removed Pin From Net: NetName=IO41 Pin=DIGITAL1-22
+Removed Pin From Net: NetName=IO42 Pin=DIGITAL1-23
+Removed Pin From Net: NetName=IO43 Pin=DIGITAL1-24
+Removed Pin From Net: NetName=IO44 Pin=DIGITAL1-25
+Removed Pin From Net: NetName=IO45 Pin=DIGITAL1-26
+Removed Pin From Net: NetName=IO46 Pin=DIGITAL1-27
+Removed Pin From Net: NetName=IO47 Pin=DIGITAL1-28
+Removed Pin From Net: NetName=IO48 Pin=DIGITAL1-29
+Removed Pin From Net: NetName=IO49 Pin=DIGITAL1-30
+Removed Pin From Net: NetName=IO50 Pin=DIGITAL1-31
+Removed Pin From Net: NetName=IO51 Pin=DIGITAL1-32
+Removed Pin From Net: NetName=IO52 Pin=DIGITAL1-33
+Removed Pin From Net: NetName=IO53 Pin=DIGITAL1-34
+Removed Pin From Net: NetName=GND Pin=DIGITAL1-35
+Removed Pin From Net: NetName=GND Pin=DIGITAL1-36
+Removed Member From Class: ClassName=Arduino mega shield Member=DIGITAL1
+Added Component: Designator= (HDR2X18)
+Add component (AddParameter): Name = "LatestRevisionDate"; Value = "17-Jul-2002"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "LatestRevisionNote"; Value = "Re-released for DXP Platform."; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Publisher"; Value = "Altium Limited"; VariantName = "[No Variations]"
+Added Pin To Net: NetName=5V Pin= -1
+Added Pin To Net: NetName=5V Pin= -2
+Added Pin To Net: NetName=IO23 Pin= -3
+Added Pin To Net: NetName=IO22 Pin= -4
+Added Pin To Net: NetName=IO25 Pin= -5
+Added Pin To Net: NetName=IO24 Pin= -6
+Added Pin To Net: NetName=IO27 Pin= -7
+Added Pin To Net: NetName=IO26 Pin= -8
+Added Pin To Net: NetName=IO29 Pin= -9
+Added Pin To Net: NetName=IO28 Pin= -10
+Added Pin To Net: NetName=IO31 Pin= -11
+Added Pin To Net: NetName=IO30 Pin= -12
+Added Pin To Net: NetName=IO33 Pin= -13
+Added Pin To Net: NetName=IO32 Pin= -14
+Added Pin To Net: NetName=IO35 Pin= -15
+Added Pin To Net: NetName=IO34 Pin= -16
+Added Pin To Net: NetName=IO37 Pin= -17
+Added Pin To Net: NetName=IO36 Pin= -18
+Added Pin To Net: NetName=IO39 Pin= -19
+Added Pin To Net: NetName=IO38 Pin= -20
+Added Pin To Net: NetName=IO41 Pin= -21
+Added Pin To Net: NetName=IO40 Pin= -22
+Added Pin To Net: NetName=IO43 Pin= -23
+Added Pin To Net: NetName=IO42 Pin= -24
+Added Pin To Net: NetName=IO45 Pin= -25
+Added Pin To Net: NetName=IO44 Pin= -26
+Added Pin To Net: NetName=IO47 Pin= -27
+Added Pin To Net: NetName=IO46 Pin= -28
+Added Pin To Net: NetName=IO49 Pin= -29
+Added Pin To Net: NetName=IO48 Pin= -30
+Added Pin To Net: NetName=IO51 Pin= -31
+Added Pin To Net: NetName=IO50 Pin= -32
+Added Pin To Net: NetName=IO53 Pin= -33
+Added Pin To Net: NetName=IO52 Pin= -34
+Added Pin To Net: NetName=GND Pin= -35
+Added Pin To Net: NetName=GND Pin= -36
+Added Member To Class: ClassName=Arduino mega shield Member=Component   Header 18X2

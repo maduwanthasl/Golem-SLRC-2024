@@ -1,0 +1,4 @@
+Record=TopLevelDocument|FileName=Main.SchDoc|SheetNumber=2
+Record=SheetSymbol|SourceDocument=Main.SchDoc|Designator=Designator|SchDesignator=Designator|FileName=I2C ADC shield.SchDoc|SheetNumber=3|SymbolType=Normal|RawFileName=I2C ADC shield.SchDoc|DesignItemId= |SourceLibraryName= |ObjectKind=Sheet Symbol|RevisionGUID= |ItemGUID= |VaultGUID= 
+Record=NoMainPathDocument|SourceDocument=Main.SchDoc|FileName=Arduino mega shield.SchDoc|SheetNumber=4
+Record=NoMainPathDocument|SourceDocument=Main.SchDoc|FileName=Block Diagram.SchDoc|SheetNumber=1
