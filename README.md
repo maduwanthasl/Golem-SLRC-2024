@@ -2,6 +2,9 @@
 
 Welcome to the Golem-SLRC-2024 repository! This project showcases my participation in the Sri Lanka Robotic Challenge (SLRC) 2024, organized by the Electronic Club at the University of Moratuwa. I participated as an individual team member and successfully completed the elimination round, securing a place in the final round. This repository contains the final code, design files, and documentation for my robot, Golem.
 
+![task](https://github.com/user-attachments/assets/8448ebd2-c201-4513-b358-25d4ffca28a5)
+
+
 ## Project Overview
 
 Golem is a line-following robot designed to navigate complex paths and perform various tasks autonomously. The robot was built using an Arduino Mega board, various sensors, motor drivers, and custom-designed components. A notable feature of Golem is its robotic arm, which I designed and 3D printed using my Imagineer 3D printer. This document provides a detailed overview of the project's development, including the design, implementation, and functionality of Golem.
