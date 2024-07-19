@@ -64,6 +64,26 @@ In the initial stage, I constructed the robot chassis using acrylic sheets and p
 
 ## Functionality
 
+## Software Components
+
+The software for Golem was developed in a modular approach, where each functionality was divided into sub-functions and implemented step-by-step. The key functionalities include:
+
+### 1. Forward Line Following using 14 IR Sensors
+
+I used 14 IR sensors to develop the line-following task. The IR sensors detect the path, and the robot adjusts its movement accordingly using the L298N motor driver. The 12V LiPo battery provides the necessary power, and buck converters (LM2596) ensure stable voltage for the components.
+
+### 2. TOF Sensor Integration for Distance Measurement
+
+A Time of Flight (TOF) sensor was added to measure the distance accurately. This helps the robot navigate and avoid obstacles.
+
+### 3. OLED Display and Rotary Encoder for Control
+
+An OLED display was added to provide real-time information about the robot's status. The rotary encoder allows for easy navigation through different functions and settings on the display, making the robot more user-friendly.
+
+### 4. IR Array Calibration
+
+Calibration code for the IR arrays was developed to ensure accurate line following. Here is a sample of the calibration code:
+
 ### Forward Line Following Reading Sensor Values
 ```cpp
 void read_sensor_values()
