@@ -4,7 +4,7 @@ Welcome to the Golem-SLRC-2024 repository! This project showcases my participati
 
 ## Project Overview
 
-Golem is a line-following robot designed to navigate complex paths and perform various tasks autonomously. The robot was built using an Arduino Mega board, various sensors, motor drivers, and custom-designed components. This document provides a detailed overview of the project's development, including the design, implementation, and functionality of Golem.
+Golem is a line-following robot designed to navigate complex paths and perform various tasks autonomously. The robot was built using an Arduino Mega board, various sensors, motor drivers, and custom-designed components. A notable feature of Golem is its robotic arm, which I designed and 3D printed using my Imagineer 3D printer. This document provides a detailed overview of the project's development, including the design, implementation, and functionality of Golem.
 
 ## Table of Contents
 - [Project Overview](#project-overview)
@@ -64,7 +64,7 @@ In the initial stage, I constructed the robot chassis using acrylic sheets and p
 
 ## Functionality
 
-### Forward Line Following
+### Forward Line Following Reading Sensor Values
 ```cpp
 void read_sensor_values()
 {
