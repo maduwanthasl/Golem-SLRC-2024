@@ -72,34 +72,164 @@ The software for Golem was developed in a modular approach, where each functiona
 
 I used 14 IR sensors to develop the line-following task. The IR sensors detect the path, and the robot adjusts its movement accordingly using the L298N motor driver. The 12V LiPo battery provides the necessary power, and buck converters (LM2596) ensure stable voltage for the components.
 
-### 2. TOF Sensor Integration for Distance Measurement
+#### Sensor calibration
+```cpp
+#include "calibrate_sensor.h"
 
-A Time of Flight (TOF) sensor was added to measure the distance accurately. This helps the robot navigate and avoid obstacles.
 
-### 3. OLED Display and Rotary Encoder for Control
+/*-----------------------------------------------------------------------------------------------------------
+----------------------------------------------SENSOR CALIBRATION---------------------------------------------
+-----------------------------------------------------------------------------------------------------------*/
 
-An OLED display was added to provide real-time information about the robot's status. The rotary encoder allows for easy navigation through different functions and settings on the display, making the robot more user-friendly.
+// Function to save threshold values to EEPROM
+void saveThresholdToEEPROM() {
+  int address = 0; // Starting EEPROM address to write the data
 
-### 4. IR Array Calibration
+  // Write threshold values to EEPROM
+  for (int i = 0; i < numSensors; i++) {
+    EEPROM.put(address, threshold[i]); // Write threshold value to EEPROM
+    address += sizeof(int); // Increment address for next threshold value
+  }
 
-Calibration code for the IR arrays was developed to ensure accurate line following. Here is a sample of the calibration code:
+}
 
-### 5. Reverse Function and Junction Detection
-A reverse IR array was added to enable the robot to move backward and detect junctions. Calibration code was also implemented for the reverse sensors. The calibrated values are stored in the EEPROM for quick access.
+// Function to read threshold values from EEPROM
+void readThresholdFromEEPROM() {
+  int address = 0; // Starting EEPROM address to read the data
 
-### 6. EEPROM Read and Write
-I developed code to read and write calibration values to the EEPROM. This ensures that the robot retains its calibration settings even after power cycles.
+  // Read threshold values from EEPROM
+  for (int i = 0; i < numSensors ; i++) {
+    EEPROM.get(address, threshold[i]); // Read threshold value from EEPROM
+    address += sizeof(int); // Increment address for next threshold value
+  }
+}
 
-### 7. Color Detection using TCS34725
-A TCS34725 color sensor module was mounted below the robot to detect color junctions on the path. This sensor helps the robot identify different colored markers on the track.
 
-### 8. Ultrasonic Sensor for Object Detection
-An ultrasonic sensor was used to detect objects within a circle. The sensor measures the distance and helps identify whether the object is a cuboid or a cylinder based on the variance in the measurements.
+void calibrateSensors() {
+  Serial.println("Calibrating sensors...");
+  
+  // Initialize minValues and maxValues arrays
+  for (int i = 0; i < numSensors; i++) {
+    minValues[i] = 1023; // Initialize with maximum possible value
+    maxValues[i] = 0; // Initialize with minimum possible value
+  }
 
-### 9. Robotic Arm with 2 DOF
-I designed a simple robotic arm with two degrees of freedom (DOF) to pick up objects. The arm uses an MG995 servo motor and a hobby servo motor. The arm design was created using CAD software and 3D printed using my Imagineer 3D printer.
+  // Move motors to calibrate sensors
+  for (int i = 0; i < 12000; i++) { // Adjust the loop count and motor speeds as needed
+    analogWrite(leftmotor_pwm,105);
+    analogWrite(rightmotor_pwm,105);
+    digitalWrite(leftForward,HIGH);
+    digitalWrite(rightBackward,HIGH);
+    for (int sensorIndex = 0; sensorIndex < numSensors; sensorIndex++) {
+      int sensorValue = analogRead(sensorPins[sensorIndex]);
+      minValues[sensorIndex] = min(minValues[sensorIndex], sensorValue);
+      maxValues[sensorIndex] = max(maxValues[sensorIndex], sensorValue);
+    }
+  }
 
-### Forward Line Following Reading Sensor Values
+  // Stop motors
+  analogWrite(leftmotor_pwm,0);
+  analogWrite(rightmotor_pwm,0);
+  stop_bot();
+
+
+  // Calculate thresholds
+  for (int i = 0; i < numSensors; i++) {
+    threshold[i] = (minValues[i] + maxValues[i]) / 2;
+  }
+
+  // // Print thresholds
+  // Serial.println("Sensor thresholds:");
+  // for (int i = 0; i < numSensors; i++) {
+  //   Serial.print("Sensor ");
+  //   Serial.print(i + 1);
+  //   Serial.print(": ");
+  //   Serial.println(threshold[i]);
+  // }
+  // Serial.println("Calibration complete.");
+
+  
+  
+
+}
+
+/*------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------*/
+
+
+// Function to save threshold values to EEPROM for reverse sensors
+void saveThresholdToEEPROMreverse() {
+  int address = 0; // Starting EEPROM address to write the data
+
+  // Write threshold values to EEPROM
+  for (int i = 0; i < numReverseSensors; i++) {
+    EEPROM.put(address, reverseThreshold[i]); // Write threshold value to EEPROM
+    address += sizeof(int); // Increment address for next threshold value
+  }
+}
+
+// Function to read threshold values from EEPROM for reverse sensors
+void readThresholdFromEEPROMreverse() {
+  int address = 0; // Starting EEPROM address to read the data
+
+  // Read threshold values from EEPROM
+  for (int i = 0; i < numReverseSensors ; i++) {
+    EEPROM.get(address, reverseThreshold[i]); // Read threshold value from EEPROM
+    address += sizeof(int); // Increment address for next threshold value
+  }
+}
+
+void calibrateReverseSensors() {
+  Serial.println("Calibrating reverse sensors...");
+  
+  // Initialize minValues and maxValues arrays
+  for (int i = 0; i < numReverseSensors; i++) {
+    reverseMinValues[i] = 1023; // Initialize with maximum possible value
+    reverseMaxValues[i] = 0; // Initialize with minimum possible value
+  }
+
+  // Move motors to calibrate sensors
+  for (int i = 0; i < 12000; i++) { // Adjust the loop count and motor speeds as needed
+    analogWrite(leftmotor_pwm, 105);
+    analogWrite(rightmotor_pwm, 105);
+    digitalWrite(leftBackward, HIGH); // Assuming reverse array needs to move backward
+    digitalWrite(rightForward, HIGH); // Assuming reverse array needs to move backward
+    for (int sensorIndex = 0; sensorIndex < numReverseSensors; sensorIndex++) {
+      // Select the channel on the multiplexer
+      selectChannel(sensorIndex);
+
+      // Read the sensor value from the multiplexer
+      int sensorValue = analogRead(reverseSensorPins[sensorIndex]);
+
+      // Update min and max values
+      reverseMinValues[sensorIndex] = min(reverseMinValues[sensorIndex], sensorValue);
+      reverseMaxValues[sensorIndex] = max(reverseMaxValues[sensorIndex], sensorValue);
+    }
+  }
+
+
+  // Stop motors
+  analogWrite(leftmotor_pwm, 0);
+  analogWrite(rightmotor_pwm, 0);
+  stop_bot();
+
+  // Calculate thresholds
+  for (int i = 0; i < numReverseSensors; i++) {
+    reverseThreshold[i] = (reverseMinValues[i] + reverseMaxValues[i]) / 2;
+  }
+
+  Serial.println("Reverse sensor thresholds:");
+  for (int i = 0; i < numReverseSensors; i++) {
+    Serial.print("Sensor ");
+    Serial.print(i + 1);
+    Serial.print(": ");
+    Serial.println(reverseThreshold[i]);
+  }
+  Serial.println("Reverse Calibration complete.");
+}
+```
+
 ```cpp
 void read_sensor_values()
 {
@@ -150,3 +280,81 @@ void read_sensor_values()
     error = defaultErrorValue;
   }
 }
+```
+
+### 2. TOF Sensor Integration for Distance Measurement
+
+A Time of Flight (TOF) sensor was added to measure the distance accurately. This helps the robot navigate and avoid obstacles.
+
+```cpp
+#include "measure_distance_tof.h"
+
+static Adafruit_VL53L0X lox = Adafruit_VL53L0X();
+
+
+void measure_distance_tof_setup() {
+  Serial.begin(9600);
+
+  // Wait until serial port opens for native USB devices
+  while (!Serial) {
+    delay(1);
+  }
+
+  Serial.println("Adafruit VL53L0X test");
+  if (!lox.begin()) {
+    Serial.println(F("Failed to boot VL53L0X"));
+    while(1);
+  }
+  // Power 
+  Serial.println(F("VL53L0X API Simple Ranging example\n\n"));
+}
+
+
+
+void measure_distance_tof_loop(int Samples) {
+  VL53L0X_RangingMeasurementData_t measure;
+  unsigned long totalDistance = 0; // Variable to store the total distance
+  int numSamples = Samples ; // Number of samples to average
+
+  for (int i = 0; i < numSamples; i++) {
+    lox.rangingTest(&measure, false); // Perform distance measurement
+    if (measure.RangeStatus != 4) {  // Phase failures have incorrect data
+      totalDistance += measure.RangeMilliMeter; // Add the distance measurement to the total
+    }
+    delay(50); // Wait a short time between measurements
+  }
+
+  // Compute the average distance
+  distance_tof = totalDistance / numSamples;
+
+  Serial.print("Average Distance (mm): ");
+  Serial.println(distance_tof);
+  return;
+
+}
+```
+
+### 3. OLED Display and Rotary Encoder for Control
+
+An OLED display was added to provide real-time information about the robot's status. The rotary encoder allows for easy navigation through different functions and settings on the display, making the robot more user-friendly.
+
+### 4. IR Array Calibration
+
+Calibration code for the IR arrays was developed to ensure accurate line following. Here is a sample of the calibration code:
+
+### 5. Reverse Function and Junction Detection
+A reverse IR array was added to enable the robot to move backward and detect junctions. Calibration code was also implemented for the reverse sensors. The calibrated values are stored in the EEPROM for quick access.
+
+### 6. EEPROM Read and Write
+I developed code to read and write calibration values to the EEPROM. This ensures that the robot retains its calibration settings even after power cycles.
+
+### 7. Color Detection using TCS34725
+A TCS34725 color sensor module was mounted below the robot to detect color junctions on the path. This sensor helps the robot identify different colored markers on the track.
+
+### 8. Ultrasonic Sensor for Object Detection
+An ultrasonic sensor was used to detect objects within a circle. The sensor measures the distance and helps identify whether the object is a cuboid or a cylinder based on the variance in the measurements.
+
+### 9. Robotic Arm with 2 DOF
+I designed a simple robotic arm with two degrees of freedom (DOF) to pick up objects. The arm uses an MG995 servo motor and a hobby servo motor. The arm design was created using CAD software and 3D printed using my Imagineer 3D printer.
+
+### Forward Line Following Reading Sensor Valu
