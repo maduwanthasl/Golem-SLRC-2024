@@ -360,4 +360,49 @@ An ultrasonic sensor was used to detect objects within a circle. The sensor meas
 ### 9. Robotic Arm with 2 DOF
 I designed a simple robotic arm with two degrees of freedom (DOF) to pick up objects. The arm uses an MG995 servo motor and a hobby servo motor. The arm design was created using CAD software and 3D printed using my Imagineer 3D printer.
 
-### Forward Line Following Reading Sensor Valu
+
+## Code Segments
+Here are some key code segments used in the project:
+
+### IR Sensor Calibration
+```cpp
+void calibrateSensors() {
+    // Calibration logic
+}
+```
+
+### EEPROM Read and Write
+```cpp
+void saveThresholdToEEPROM() {
+    // Code to save calibration values to EEPROM
+}
+
+void readThresholdFromEEPROM() {
+    // Code to read calibration values from EEPROM
+}
+```
+### Color Detection
+```cpp
+void detectColor() {
+    // Code to detect colors using TCS34725 sensor
+}
+```
+### Ultrasonic Object Detection
+```cpp
+
+void detectObject() {
+    // Code to detect objects using ultrasonic sensor
+}
+```
+## Photos
+Robot Photos: Link to Photos
+Task Photos: Link to Photos
+Elimination Round Photos: Link to Photos
+
+## Acknowledgements
+I would like to thank the Electronic Club at the University of Moratuwa for organizing the Sri Lanka Robotic Challenge (SLRC) 2024. Special thanks to my mentors and peers for their support and guidance throughout the project.
+
+Contact
+For any questions or collaborations, feel free to reach out to me at [Your Email].
+
+
