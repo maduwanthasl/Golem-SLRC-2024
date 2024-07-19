@@ -84,6 +84,21 @@ An OLED display was added to provide real-time information about the robot's sta
 
 Calibration code for the IR arrays was developed to ensure accurate line following. Here is a sample of the calibration code:
 
+### 5. Reverse Function and Junction Detection
+A reverse IR array was added to enable the robot to move backward and detect junctions. Calibration code was also implemented for the reverse sensors. The calibrated values are stored in the EEPROM for quick access.
+
+### 6. EEPROM Read and Write
+I developed code to read and write calibration values to the EEPROM. This ensures that the robot retains its calibration settings even after power cycles.
+
+### 7. Color Detection using TCS34725
+A TCS34725 color sensor module was mounted below the robot to detect color junctions on the path. This sensor helps the robot identify different colored markers on the track.
+
+### 8. Ultrasonic Sensor for Object Detection
+An ultrasonic sensor was used to detect objects within a circle. The sensor measures the distance and helps identify whether the object is a cuboid or a cylinder based on the variance in the measurements.
+
+### 9. Robotic Arm with 2 DOF
+I designed a simple robotic arm with two degrees of freedom (DOF) to pick up objects. The arm uses an MG995 servo motor and a hobby servo motor. The arm design was created using CAD software and 3D printed using my Imagineer 3D printer.
+
 ### Forward Line Following Reading Sensor Values
 ```cpp
 void read_sensor_values()
